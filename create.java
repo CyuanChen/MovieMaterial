@@ -16,9 +16,9 @@ public class create
     Class.forName("org.sqlite.JDBC");
     create createnew = new create();
     System.out.println("Insert file.");
-    //createnew.testcreate();
+    createnew.testcreate();
     System.out.println("Import file");
-    //createnew.import_file();
+    createnew.import_file();
     System.out.println("Setup id and passward");
     createnew.setup();
 
