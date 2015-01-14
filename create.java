@@ -7,49 +7,54 @@ import java.util.Scanner;
 import java.io.*;
 import java.util.*;
 
+
 public class create
 {
+  public String path = "/home/peter/workspace";
   
-  public static void main(String[] args) throws ClassNotFoundException
+  /*public static void main(String[] args) throws ClassNotFoundException
   {
-    // load the sqlite-JDBC driver using the current class loader
     Class.forName("org.sqlite.JDBC");
-    create createnew = new create();
-    System.out.println("Insert file.");
-    createnew.testcreate();
+    create newMovie = new create();
+   
     System.out.println("Import file");
-    createnew.import_file();
+    newMovie.import_file();
     System.out.println("Setup id and passward");
-    createnew.setup();
-
-
-  }//end main
-  public void testcreate(){
+    newMovie.setup();
+    System.out.println("Import new file");
+    newMovie.import_file();
+    System.out.println("Insert file.");
+    newMovie.testcreate();
+  }//end main*/
+   public void testcreate(){
     //System.out.println("Please create your table use : sample(testid integer, testname string) ");
     //String s;
     String s2;
-    String sql = "create table testtable (testid integer, testname string)";
-    int i = 1;
+    String sql = "create table person (file_name string, tag string)";
+    String s3;
     Scanner scan = new Scanner(System.in);
     //s = scan.next();
-    System.out.println("Please input your file:");
+    Scanner scan2 = new Scanner(System.in);
+    System.out.println("Please input your file name:");
     s2 = scan.next();
-    String sqlname = "insert into testtable values(" + i + ", '" + s2 + "')"; 
+    System.out.println("Enter the tag:");
+    s3 = scan.next();
+    String sqlname = "insert into person values('" + s2 + "', '" + s3 + "')"; 
     Connection connection = null;
     try
     {
       // create a database connection  // means create a database
-      connection = DriverManager.getConnection("jdbc:sqlite:hihi.db");
+      connection = DriverManager.getConnection("jdbc:sqlite:testsql.db");
 
       Statement statement = connection.createStatement();
       statement.setQueryTimeout(30);  // set timeout to 30 sec.
       //----------------------------------------------------------
-      statement.executeUpdate("drop table if exists testtable");
+      statement.executeUpdate("drop table if exists person");
       statement.executeUpdate(sql);
       statement.executeUpdate(sqlname);
       
       //Ensure the test exist
-      ResultSet rs = statement.executeQuery("select * from testtable");//print all entries
+      ResultSet rs = statement.executeQuery("select * from person");//print all entries
       while(rs.next())
       {
         // read the result set
@@ -79,27 +84,24 @@ public class create
       }
     }
 
+
   }//end testcreate
 
-    public void import_file(){
-    // load the sqlite-JDBC driver using the current class loader
-    System.out.println("Please input your file: ");
-    String s;
-    String sql = "create table testtable (testid integer, testname string)";
-    int i = 1;
-    Scanner scan = new Scanner(System.in);
-    s = scan.nextLine(); 
-    String sqlname = "insert into testtable values(2, '" + s + "')"; 
-    String folder ;
-    System.out.println("Please input your folder path : /home/peter/workspace");
-    Scanner scan2 = new Scanner(System.in);
-    folder = scan2.nextLine();
+    public void import_file(int i ){
+    // load the sqlite-JDBC driver using the current class loader 
+    //String folder ;
+    //System.out.println("Please input your folder path : /home/peter/workspace");
+    //Scanner scan2 = new Scanner(System.in);
+    //folder = scan2.nextLine();
+    String table_name = "drop table if exists person"+ i;
+    String create_table = "create table person" + i + "(file_name string, tag string)";
+
 
     Connection connection = null;
     try
     {
       // create a database connection  // means create a database
-      connection = DriverManager.getConnection("jdbc:sqlite:hihi.db");
+      connection = DriverManager.getConnection("jdbc:sqlite:testsql.db");
 
       Statement statement = connection.createStatement();
       statement.setQueryTimeout(30);  // set timeout to 30 sec.
@@ -108,12 +110,27 @@ public class create
       statement.executeUpdate("create table person (file_name string, tag string)");
       statement.executeUpdate("insert into person values('iphone', 'Apple')");
       statement.executeUpdate("insert into person values('iphone', '3C')");
-      statement.executeUpdate("insert into person values('iphone', 'used')");
-      statement.executeUpdate("insert into person values('TV','furniture')");
+      statement.executeUpdate("insert into person values('iphone', '')");
+      statement.executeUpdate("insert into person values('TV','')");
       statement.executeUpdate("insert into person values('TV','3C')");
       statement.executeUpdate("insert into person values('chair','furniture')");
+      statement.executeUpdate("drop table if exists person1");
+      statement.executeUpdate("create table person1 (file_name string, tag string)");
+      statement.executeUpdate("drop table if exists person2");
+      statement.executeUpdate("create table person2 (file_name string, tag string)");
+      statement.executeUpdate("drop table if exists person3");
+      statement.executeUpdate("create table person3 (file_name string, tag string)");
+      statement.executeUpdate("drop table if exists person4");
+      statement.executeUpdate("create table person4 (file_name string, tag string)");
+      statement.executeUpdate("drop table if exists person5");
+      statement.executeUpdate("create table person5 (file_name string, tag string)");
+      if (i > 0){
+        statement.executeUpdate(table_name);
+        statement.executeUpdate(create_table);
+      }
 
-      File file = new File(folder); 
+
+      File file = new File(path); 
       File[] files = file.listFiles();
       String a = ""; 
        
@@ -124,12 +141,6 @@ public class create
         String nname = "insert into person values( '" + a + "', 'test' )";
         statement.executeUpdate(nname);
       }
-      statement.executeUpdate("drop table if exists testtable");
-      statement.executeUpdate(sql);
-      statement.executeUpdate(sqlname);
-      //statement.executeUpdate("delete from testsql where file = 'test'");
-      //statement.executeUpdate("delete from testsql where file = 'neeho'");
-      
       // Search
       ResultSet rs = statement.executeQuery("select * from person");
       while(rs.next())
@@ -137,14 +148,17 @@ public class create
         // read the result set
         String file_name = rs.getString("file_name");
         String tag_name = rs.getString("tag");
-        //System.out.println("file name  = " + file_name);
-        //System.out.println("tag = " + tag_name);
-        String search_file = "models.py";
+        System.out.println("file name  = " + file_name);
+        System.out.println("tag = " + tag_name);
+        //search
+        /*String search_file = "models.py";
         String search_tag = "test";
         if (tag_name.equals(search_tag)){
           System.out.println("Search tag = '"+  search_tag + "' and print file name:");
           System.out.println("file name = " + file_name );
-        }
+        }*/
+
+
 
       }
 
@@ -170,25 +184,29 @@ public class create
       }
     }  
   
-
-
   }//end import_file
   public void setup(){
-    System.out.println("Hello");
     String s2;
     String sql = "create table setup (setup_id string, setup_passward string)";
-    String setup_id ="peterchen302";
-    String setup_passward = "test123";
+    String manager_id = "manager";
+    String manager_pwd = "m12345";
+    String designer_id ="designer";
+    String designer_pwd = "d45678";
     //Scanner scan = new Scanner(System.in);
     //s = scan.next();
     //System.out.println("Please input your file:");
     //s2 = scan.next();
-    String sqlname = "insert into setup values('" + setup_id + "', '" + setup_passward + "')"; 
+    String sqlname = "insert into setup values('" + manager_id + "', '" + manager_pwd + "')";
+    String sqlname2 = "insert into setup values('" + designer_id + "', '" + designer_pwd + "')"; 
+    System.out.println("Please enter the path of the folder. default:/home/peter/workspace ");
+    Scanner scan1 = new Scanner(System.in);
+    path = scan1.next();
+
     Connection connection = null;
     try
     {
       // create a database connection  // means create a database
-      connection = DriverManager.getConnection("jdbc:sqlite:hihi.db");
+      connection = DriverManager.getConnection("jdbc:sqlite:testsql.db");
 
       Statement statement = connection.createStatement();
       statement.setQueryTimeout(30);  // set timeout to 30 sec.
@@ -196,6 +214,8 @@ public class create
       statement.executeUpdate("drop table if exists setup");
       statement.executeUpdate(sql);
       statement.executeUpdate(sqlname);
+      statement.executeUpdate(sqlname2);
+
       
       //Ensure the test exist
       ResultSet rs = statement.executeQuery("select * from setup");//print all entries
@@ -205,6 +225,7 @@ public class create
         System.out.println("test successed.");
         System.out.println("setup_id : " + rs.getString("setup_id"));
         System.out.println("setup_passward : " + rs.getString("setup_passward"));
+        
       }
 
 
@@ -229,7 +250,5 @@ public class create
       }
     }
   }
-
-
 
 }

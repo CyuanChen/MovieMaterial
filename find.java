@@ -26,12 +26,12 @@ public class find
       
       //statement.executeUpdate("delete from testsql where file = 'test'");
       // Search
-      ResultSet rs = statement.executeQuery("select * from testtable");
+      ResultSet rs = statement.executeQuery("select * from person");
       while(rs.next())
       {
         // read the result set
-        System.out.println("name = " + rs.getString("testname"));
-        System.out.println("id = " + rs.getInt("testid"));
+        System.out.println("name = " + rs.getString("file_name"));
+        System.out.println("id = " + rs.getString("tag"));
       }
 
 
