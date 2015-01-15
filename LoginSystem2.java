@@ -1,18 +1,23 @@
 import javax.swing.*;
+import java.util.Scanner;
 import java.awt.event.*;
 import java.sql.*;
-import java.awt.event.ActionEvent;  
-import java.awt.event.ActionListener;
-
-
-public class LoginSystem {
+ 
+ 
+ 
+public class LoginSystem2 {
 	
 	Connection con;
 	Statement st;
 	ResultSet rs;
 	
+    String manager_id = "manager";
+    String manager_pwd = "m12345";
+    String designer_id ="designer";
+    String designer_pwd = "d45678";
+	
 	JFrame f = new JFrame("Login");
-	//JFrame f1 = new JFrame("Admin Login");
+	JFrame f1 = new JFrame("Admin Login");
 	JLabel l = new JLabel("ID");
 	JLabel l1 = new JLabel("Password");
 	JLabel l2 = new JLabel("User/Admin");
@@ -20,20 +25,36 @@ public class LoginSystem {
 	JTextField t1 = new JTextField(10);
 	JTextField t2 = new JTextField(5);
 	JButton b = new JButton("Login");
-	//JButton b1 = new JButton("Admin Login");
-	String manager_id = "manager";
-    String manager_pwd = "m12345";
-    String designer_id ="designer";
-    String designer_pwd = "d45678";
-
-    String id = t.getText();
+	//JButton b1 = new JButton(" Login");
+	
+	//Scanner in = new Scanner(System.in);
+	String id = t.getText();
 	String pwd = t1.getText();
 	String adminn = t2.getText();
 	
 	
 	
 	
-	public void loginsystem(){
+ 
+	 if (adminn.equals(manager_id)){
+       if (id.equals(manager_id)){
+           if (pwd.equals(manager_pwd))
+        	   System.out.print("login success");
+         }
+         }
+	 
+	 if (adminn.equals(designer_id)){
+	       if (id.equals(designer_id)){
+	           if (pwd.equals(designer_pwd))
+	        	   System.out.print("login success");
+	         }	 
+	 }
+             
+	
+	
+	
+	
+	public LoginSystem(){
 		connect();
 		frame();
 		
@@ -43,10 +64,10 @@ public class LoginSystem {
 		
 		try{
 			
-			String driver = "org.sqlite.JDBC" ;
+			String driver = "sun.jdbc.odbc.JdbcOdbcDriver" ;
 			Class.forName(driver);
 			
-			String db = "jdbc:sqlite:testsql.db";
+			String db = "jdbc:odbc:db1";
 	//		String db1 = "jdbc:odbc:db1";
 			con = DriverManager.getConnection(db);
 	//		con = DriverManager.getConnection(db1);
@@ -74,8 +95,14 @@ public class LoginSystem {
     	p.add(t2);
     	p.add(b);
     //	p.add(b1);
-    	f.add(p);	
-	}
-	
-
+      	
+    	f.add(p);
+    	
+		
+	}	
+	//public static void main(String[] Args){
+	//	new LoginSystem();
+	//	
+	//}
+ 
 }

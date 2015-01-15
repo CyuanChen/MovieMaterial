@@ -226,6 +226,7 @@ public class create
         System.out.println("setup_id : " + rs.getString("setup_id"));
         System.out.println("setup_passward : " + rs.getString("setup_passward"));
         
+        
       }
 
 

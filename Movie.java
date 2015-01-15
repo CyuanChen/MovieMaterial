@@ -16,7 +16,7 @@ public class Movie {
 	    System.out.println("Import file");
 	    newcreate.import_file(i);
 	    // System.out.println("Setup id and passward");
-	    // newcreate.setup();
+	    //newcreate.setup();
 	    // System.out.println("Import new file");
 	    // newcreate.import_file();
 	    // System.out.println("Insert file.");
@@ -24,10 +24,16 @@ public class Movie {
 	    // Remove_record newRemove_record = new Remove_record();
 	    // newRemove_record.delete_lost_file();
 	    Search_tag newSearch_tag = new Search_tag();
-	    // newSearch_tag.search();
+	    //newSearch_tag.search();
 	    newSearch_tag.search_file();
 	    //LoginSystem newLoginSystem = new LoginSystem();
 	    //newLoginSystem.loginsystem();
+	    //Login newLogin = new Login();
+	    //newLogin.login();
+	    //find newfind = new find();
+	    //newfind.find();
+	    //Interface newInterface = new Interface();
+	    //newInterface.test();
 
 
 
